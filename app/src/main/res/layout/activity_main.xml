@@ -20,23 +20,6 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputLayoutKey"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="@string/hint_input_key"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textTitle">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputKey"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputLayoutValue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -44,7 +27,7 @@
         android:hint="@string/hint_input_value"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/inputLayoutKey">
+        app:layout_constraintTop_toBottomOf="@+id/textTitle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/inputValue"
@@ -57,38 +40,22 @@
         android:id="@+id/buttonSave"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="24dp"
         android:text="@string/button_save"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/inputLayoutValue" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputLayoutReadKey"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:hint="@string/hint_input_key"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonSave">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputReadKey"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintTop_toBottomOf="@+id/inputLayoutValue" />
 
     <Button
         android:id="@+id/buttonRead"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="32dp"
         android:text="@string/button_read"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/inputLayoutReadKey" />
+        app:layout_constraintTop_toBottomOf="@+id/switch2" />
 
     <TextView
         android:id="@+id/textDataStoredValue"
@@ -99,6 +66,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/buttonRead"
         tools:text="Nenhum valor encontrado para a chave config" />
+
+    <Switch
+        android:id="@+id/swType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Tipo valor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/switch2"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSave"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <Switch
+        android:id="@+id/switch2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Tipo Boolean"
+        app:layout_constraintEnd_toStartOf="@+id/swType"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSave" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

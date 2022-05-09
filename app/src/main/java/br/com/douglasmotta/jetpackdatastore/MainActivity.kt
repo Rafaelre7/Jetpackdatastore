@@ -2,6 +2,7 @@ package br.com.douglasmotta.jetpackdatastore
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.VibrationAttributes
 import android.widget.Button
 import android.widget.TextView
 import androidx.datastore.core.DataStore
@@ -21,6 +22,10 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+
+    val isSaveBoolean = preferencesKey<Boolean>("IS_SAVE_BOOLEAN")
+    val isSaveString = preferencesKey<String>("IS_SAVE_STRING")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater).apply {
@@ -29,32 +34,53 @@ class MainActivity : AppCompatActivity() {
 
         binding.run {
             buttonSave.setOnClickListener {
-                lifecycleScope.launch {
-                    val key = inputKey.text?.toString() ?: ""
-                    val value = inputValue.text?.toString() ?: ""
-                    saveData(key, value)
+                if (swType.isChecked){
+                    lifecycleScope.launch {
+                        val value = switch2.isChecked
+                        setIsSaveBoolean(value)
+                    }
+                }else{
+                    lifecycleScope.launch {
+                        val value = inputValue.text?.toString() ?: ""
+                        saveData(value)
+                        binding.inputValue.setText("")
+                    }
                 }
             }
 
             buttonRead.setOnClickListener {
-                lifecycleScope.launch {
-                    val key = inputReadKey.text?.toString() ?: ""
-                    textDataStoredValue.text = readData(key) ?: "Nenhum valor encontrato para a chave $key"
+                if (swType.isChecked){
+                    lifecycleScope.launch {
+                        textDataStoredValue.text = getIsReadBoolean().toString()
+                    }
+                }else{
+                    lifecycleScope.launch {
+                        textDataStoredValue.text = readData() ?: "Nenhum valor encontrato para a chave"
+                    }
                 }
             }
         }
     }
 
-    private suspend fun saveData(key: String, value: String) {
-        val prefsKey = preferencesKey<String>(key)
+    private suspend fun saveData(value: String) {
         dataStore.edit { settings ->
-            settings[prefsKey] = value
+            settings[isSaveString] = value
         }
     }
 
-    private suspend fun readData(key: String): String? {
-        val prefsKey = preferencesKey<String>(key)
+    private suspend fun readData(): String? {
         val prefs = dataStore.data.first()
-        return prefs[prefsKey]
+        return prefs[isSaveString]
+    }
+
+    private suspend fun setIsSaveBoolean(isDarkTheme: Boolean) {
+        dataStore.edit { pref ->
+            pref[isSaveBoolean] = isDarkTheme
+        }
+    }
+
+    private suspend fun getIsReadBoolean() : Boolean {
+        val preferences = dataStore.data.first()
+        return preferences[isSaveBoolean] ?: false
     }
 }

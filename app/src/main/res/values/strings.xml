@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">JetpackDataStore</string>
     <string name="text_title">Jetpack DataStore</string>
-    <string name="hint_input_key">Digite uma chave</string>
-    <string name="hint_input_value">Digite um valor</string>
+    <string name="hint_input_key">Digite uma chave string</string>
+    <string name="hint_inpu">Digite uma chave string</string>
+    <string name="hint_input_value">Digite um valor string</string>
+    <string name="hint_input_key_bool">Digite uma chave boolean</string>
+    <string name="hint_input_value_bool">Digite um valor boolean</string>
     <string name="button_save">Salvar</string>
     <string name="button_read">Ler</string>
 </resources>
